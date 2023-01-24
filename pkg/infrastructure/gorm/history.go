@@ -53,3 +53,20 @@ func (r *historyRepository) FindByLatestTransaction(AccountUUID uuid.UUID) (enti
 
 	return
 }
+
+func (r *historyRepository) FindByDateTime(startDateTime, endDateTime time.Time) (entity []*domainHistory.Entity, err error) {
+	err = r.dbSlave.
+		Where("date_time between ? AND ? ", startDateTime, endDateTime).
+		Order("id asc").
+		Find(&entity).
+		Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return entity, nil
+		}
+		err = constants.ErrorDatabase
+		return
+	}
+
+	return
+}

@@ -30,6 +30,8 @@ CREATE TABLE account (
     "created_at" timestamp NOT NULL DEFAULT (now()),
     "updated_at" timestamp NOT NULL DEFAULT (now())
 );
+
+insert into account (id) VALUES ('87b0c12e-dbfd-477d-9712-f60f6ef6c235');
 -- +goose StatementEnd
 
 -- +goose Down

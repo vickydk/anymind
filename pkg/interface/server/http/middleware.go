@@ -1,7 +1,6 @@
 package http
 
 import (
-	"anymind/pkg/interface/interceptor"
 	"anymind/pkg/shared/config"
 	"anymind/pkg/shared/logger"
 	"anymind/pkg/shared/utils"
@@ -36,8 +35,6 @@ func setupMiddleware(server *echo.Echo, cfg *config.Config) {
 			return h(c)
 		}
 	})
-	interceptor := interceptor.New()
-	server.Use(interceptor.ValidateAccess())
 
 	server.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},

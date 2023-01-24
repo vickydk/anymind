@@ -17,5 +17,6 @@ func SetupRouter(server *echo.Echo, handler *Handler) {
 
 	root := server.Group("/api/v1")
 	root.POST("/transactions", handler.transactionHandler.addTransactions)
+	root.POST("/history/search", handler.historyHandler.searchHistory)
 
 }

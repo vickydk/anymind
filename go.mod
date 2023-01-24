@@ -4,7 +4,6 @@ go 1.19
 
 require (
 	github.com/Shopify/sarama v1.37.2
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/gogo/protobuf v1.3.2
 	github.com/jinzhu/gorm v1.9.16
@@ -13,21 +12,13 @@ require (
 	github.com/orcaman/concurrent-map v1.0.0
 	github.com/pressly/goose v2.7.0+incompatible
 	github.com/segmentio/encoding v0.3.6
-	github.com/segmentio/kafka-go v0.4.38
 	github.com/spf13/cast v1.5.0
 	github.com/spf13/viper v1.14.0
 	go.uber.org/zap v1.23.0
 	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa
-	google.golang.org/grpc v1.51.0
-	google.golang.org/protobuf v1.28.1
-	gopkg.in/resty.v1 v1.12.0
 )
 
-require (
-	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/hashicorp/go-uuid v1.0.3 // indirect
-	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6 // indirect
-)
+require github.com/hashicorp/go-uuid v1.0.3 // indirect
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

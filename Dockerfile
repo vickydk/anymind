@@ -22,9 +22,14 @@ RUN CGO_ENABLED=0 GOOS=linux go build -v -o anymind ./cmd/app/main.go
 ############################
 # STEP 2 build a small image
 ############################
-FROM scratch
-
+FROM alpine:3.15
 COPY --from=builder /app/resources /resources
+COPY --from=builder /app/migration /migration
 COPY --from=builder /app/anymind /app/anymind
+COPY --from=builder /app/wait-for.sh /app/wait-for.sh
 
-CMD ["/app/anymind"]
+RUN pwd
+RUN ls -al
+
+EXPOSE 8811
+CMD [ "/app/anymind", "--port", "8811" ]

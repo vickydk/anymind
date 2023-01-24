@@ -2,8 +2,7 @@
   "apps":{
     "name":"anymind",
     "version":"1.0.0",
-    "httpPort":8811,
-    "grpcPort":8822
+    "httpPort":8811
   },
   "database":{
     "master": {
@@ -11,8 +10,8 @@
       "password":"postgres",
       "name":"postgres",
       "schema":"public",
-      "host":"localhost",
-      "port":54321,
+      "host":"db",
+      "port":5432,
       "minIdleConnections":10,
       "maxOpenConnections":30,
       "debugMode":false
@@ -22,39 +21,11 @@
       "password":"postgres",
       "name":"postgres",
       "schema":"public",
-      "host":"localhost",
-      "port":54321,
+      "host":"db",
+      "port":5432,
       "minIdleConnections":10,
       "maxOpenConnections":30,
       "debugMode":false
     }
-  },
-  "queue": {
-    "address": "localhost:9092",
-    "retryMax": 5,
-    "returnSuccesses": true
-  },
-  "kafka": {
-    "consumer":{
-      "brokers": "localhost:9092",
-      "group": "anymind",
-      "topics": [
-        {
-          "name": "history-transactions",
-          "topic": "history-transactions"
-        }
-      ]
-    },
-    "producer": {
-      "address": "localhost:9092",
-      "retryMax": 5,
-      "returnSuccesses": true
-    }
-  },
-  "kafkaProcedureTopics": {
-    "historyTransaction": "history-transactions"
-  },
-  "kafkaConsumerTopics": {
-    "historyTransaction": "history-transactions"
   }
 }

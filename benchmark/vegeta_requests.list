@@ -1,3 +1,11 @@
 POST http://127.0.0.1:8811/api/v1/transactions
 Content-Type: application/json
 @./benchmark/transactions1.request
+
+POST http://127.0.0.1:8811/api/v1/transactions
+Content-Type: application/json
+@./benchmark/transactions2.request
+
+POST http://127.0.0.1:8811/api/v1/transactions
+Content-Type: application/json
+@./benchmark/transactions3.request

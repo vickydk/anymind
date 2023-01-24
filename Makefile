@@ -3,26 +3,12 @@
 export REPO_NAME=anymind
 
 build:
-	@echo "${NOW} Building HTTP Server"
-	@go build -o ./bin/${REPO_NAME}-http cmd/http/main.go
-
-build-grpc:
-	@echo "${NOW} Building GRPC Server"
-	@go build -o ./bin/${REPO_NAME}-grpc cmd/grpc/main.go
-
-build-app:
-	@echo "${NOW} Building GRPC & HTTP Server"
+	@echo "${NOW} Building Service"
 	@go build -o ./bin/${REPO_NAME}-grpc cmd/app/main.go
 
 docker-build:
 	@ echo "Building anymind image"
 	@ docker build -f Dockerfile -t anymind .
-
-run: build
-	@./bin/${REPO_NAME}-http
-
-run-grpc: build-grpc
-	@./bin/${REPO_NAME}-grpc
 
 run-app: build-app
 	@./bin/${REPO_NAME}-app
@@ -33,3 +19,18 @@ compose: compose_down
 
 compose_down:
 	docker-compose down
+
+run_benchmark:
+	@cat benchmark/vegeta_requests.list | vegeta attack -duration=5s -rate=10 | vegeta report --type=text
+
+staticcheck_install:
+	go install honnef.co/go/tools/cmd/staticcheck@latest
+
+staticcheck:
+	staticcheck -go 1.18 ./...
+
+linter_install:
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+
+linter:
+	golangci-lint run -v --disable=typecheck --disable=structcheck --timeout=5m --go=1.18

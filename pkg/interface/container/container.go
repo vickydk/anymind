@@ -1,8 +1,6 @@
 package container
 
 import (
-	QueueWrapper "anymind/pkg/infrastructure/queue"
-	"anymind/pkg/shared/queue"
 	"github.com/go-playground/validator"
 
 	"anymind/pkg/infrastructure/gorm"
@@ -38,12 +36,8 @@ func Setup() *Container {
 	accountRepo := gorm.AccountSetup(dbMaster, dbSlave)
 	transactionRepo := gorm.TransactionsSetup(dbMaster, dbSlave)
 
-	queueProducer := queue.SetupKafkaProducer(&cfg.Kafka.Producer)
-
-	queueWrapper := QueueWrapper.SetupQueue(queueProducer, cfg.KafkaProcedureTopics)
-
 	historySvc := historySvc.NewService(historyRepo)
-	transactionSvc := transactionSvc.NewService(queueWrapper, transactionRepo, accountRepo, historySvc)
+	transactionSvc := transactionSvc.NewService(transactionRepo, accountRepo, historySvc)
 
 	return &Container{
 		Config:         cfg,
