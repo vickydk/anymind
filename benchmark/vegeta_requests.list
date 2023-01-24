@@ -1,0 +1,3 @@
+POST http://127.0.0.1:8811/api/v1/transactions
+Content-Type: application/json
+@./benchmark/transactions1.request
